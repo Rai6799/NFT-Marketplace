@@ -1,0 +1,32 @@
+cache:
+  paths:
+    - node_modules/
+  
+install_deps:
+  stage: prepare
+  tags:
+    - ci
+  script:
+    - npm install
+
+coverage:
+  stage: coverage
+  tags:
+    - ci
+  script:
+    # Now test requires typechain classes
+    - export NODE_OPTIONS=--openssl-legacy-provider
+    - npx hardhat compile
+    - npx hardhat coverage
+  coverage: '/Statements\s+:\s(\d+.?\d+)%/'
+  artifacts:
+    paths:
+      - ./coverage
+    expire_in: 1 week
+
+stages:
+  - prepare
+  - test
+  - coverage
+  - build
+  - deploy

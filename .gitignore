@@ -1,0 +1,12 @@
+node_modules
+.env
+coverage
+coverage.json
+typechain
+.prettierrc
+
+#Hardhat files
+cache
+artifacts
+.vscode/*
+.vscode/launch.json
